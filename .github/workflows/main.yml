@@ -3,7 +3,7 @@ name: timerow-build-deploy
 on:
   push:
     branches:
-      - main
+      - master
     
 permissions:
   contents: write
@@ -36,7 +36,7 @@ jobs:
         id: deployment
         uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
         with:
-          path: .
+          path: output
 
   deploy:
     needs: build

@@ -17,6 +17,10 @@ HISTORY_HTML = os.path.join(OUTPUT_DIR, "macro.html")
 AVERAGED_HTML = os.path.join(OUTPUT_DIR, "averaged.html")
 PLOTLY_COMBINED_HTML = os.path.join(OUTPUT_DIR, "index.html")
 
+# Create necessary directories
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(INPUT_DIR, exist_ok=True)
+
 COMMON_MARGIN = dict(l=25, r=25, t=50, b=50)
 CONFIG = {
     'displaylogo': False,
@@ -75,13 +79,11 @@ def prepare_dataset(pathname):
     
     df = df.sort_values('datetime')
 
-    # Save prepared data to CSV
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     prepared_csv = os.path.join(OUTPUT_DIR, "prepared_dataset.csv")
     df.to_csv(prepared_csv, index=False)
     logging.info(f"Prepared data saved to {prepared_csv}")
 
-    # Remove original CSV
     os.remove(pathname)
     logging.info(f"Original file {pathname} removed")
 
