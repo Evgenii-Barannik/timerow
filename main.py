@@ -1,4 +1,4 @@
-from zoneinfo import ZoneInfo
+# from zoneinfo import ZoneInfo
 import os 
 import pandas as pd
 import logging
@@ -11,8 +11,8 @@ from pathlib import Path
 
 OUTPUT_DIR = "output"
 INPUT_DIR = "input"
-UTC_TZ = ZoneInfo('UTC')
-MOSCOW_TZ = ZoneInfo('Europe/Moscow')
+# UTC_TZ = ZoneInfo('UTC')
+# MOSCOW_TZ = ZoneInfo('Europe/Moscow')
 HISTORY_HTML = os.path.join(OUTPUT_DIR, "macro.html")
 AVERAGED_HTML = os.path.join(OUTPUT_DIR, "averaged.html")
 PLOTLY_COMBINED_HTML = os.path.join(OUTPUT_DIR, "index.html")
@@ -52,8 +52,8 @@ def prepare_dataset(pathname):
         if datapoint_type == 0:
             datetime_str = row.iloc[2]
             value_str = row.iloc[4]
-            dt = pd.to_datetime(datetime_str, format='%d-%m-%Y %H:%M', utc=True)
-            dt = dt.tz_convert(MOSCOW_TZ)
+            dt = pd.to_datetime(datetime_str, format='%d-%m-%Y %H:%M')
+            # dt = dt.tz_localize(MOSCOW_TZ)
             value = float(str(value_str).replace(',', '.'))
             datetimes.append(dt)
             times.append(dt.time())
@@ -62,8 +62,8 @@ def prepare_dataset(pathname):
         if datapoint_type == 1:
             datetime_str = row.iloc[2]
             value_str = row.iloc[5]
-            dt = pd.to_datetime(datetime_str, format='%d-%m-%Y %H:%M', utc=True)
-            dt = dt.tz_convert(MOSCOW_TZ)
+            dt = pd.to_datetime(datetime_str, format='%d-%m-%Y %H:%M')
+            # dt = dt.tz_localize(MOSCOW_TZ)
             value = float(str(value_str).replace(',', '.'))
             datetimes.append(dt)
             times.append(dt.time())
